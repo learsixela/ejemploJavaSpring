@@ -1,19 +1,14 @@
 package cl.awakelab.ejercicio.models;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="cursos")
@@ -22,6 +17,8 @@ public class Curso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotBlank(message = "DEBES INGRESAR ALGO")
 	private String nombre;
 	private String detalle;
 
@@ -30,12 +27,60 @@ public class Curso {
 
 	private Date updateAt;
 	
-	
-	@OneToOne(fetch=FetchType.LAZY)
+	/*
+		ONE TO ONE
+	 */
+
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="alumno_id")
 	private Alumno alumno;
-	
-	
+
+	/*
+		MANY TO ONE
+	 */
+
+	@ManyToOne
+	@JoinColumn(name = "profesor_id")
+	private Profesor profesor;
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+
+	/*
+		MANY TO MANY
+	 */
+
+	@ManyToMany
+	@JoinTable(
+			name = "CURSO_PRUEBA",
+			joinColumns = @JoinColumn(name = "PRUEBA_ID"),
+			inverseJoinColumns = @JoinColumn(name = "CURSO_ID")
+	)
+	private Set<Prueba> pruebas = new HashSet<>();
+
+	public Set<Prueba> getPruebas() {
+		return pruebas;
+	}
+
+	public void setPruebas(Set<Prueba> pruebas) {
+		this.pruebas = pruebas;
+	}
+
+	public void addPrueba(Prueba prueba) {
+		pruebas.add(prueba);
+		prueba.getCursos().add(this);
+	}
+
+	public void deletePrueba(Prueba prueba) {
+		pruebas.remove(prueba);
+		prueba.getCursos().remove(this);
+	}
+
 	@PrePersist
 	protected void onCreate() {
 		setCreateAt(new Date());
@@ -105,5 +150,16 @@ public class Curso {
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Curso{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				", detalle='" + detalle + '\'' +
+				", createAt=" + createAt +
+				", updateAt=" + updateAt +
+				", pruebas=" + pruebas +
+				'}';
+	}
 }

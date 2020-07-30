@@ -28,7 +28,7 @@ public class Alumno {
 
 	private Date updateAt;
 
-	@OneToOne(mappedBy="alumno", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(mappedBy="alumno", fetch=FetchType.LAZY)
 	private Curso curso;
 	
 	
