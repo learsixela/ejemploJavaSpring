@@ -12,6 +12,7 @@ public class Profesor {
 
     @Column(name = "NAME", nullable = false)
     private String nombrecito;
+    private int age;
 
     @OneToMany(mappedBy = "profesor",
             cascade = {CascadeType.DETACH,
@@ -34,6 +35,14 @@ public class Profesor {
 
     public void setNombrecito(String name) {
         this.nombrecito = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     // ***************************************************
@@ -74,6 +83,7 @@ public class Profesor {
         return "Profesor{" +
                 "id=" + id +
                 ", nombrecito='" + nombrecito + '\'' +
+                ", edad='" + age + '\'' +
                 ", cursosLista=" + cursosLista +
                 '}';
     }

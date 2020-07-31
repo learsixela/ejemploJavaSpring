@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfesorService {
@@ -31,18 +32,13 @@ public class ProfesorService {
     }
 
     public Profesor findOne(Long id) {
-        return profesorRepository.findById(id)
+        // Buscamos un profesor de la tabla y si no es encontrado
+        // retonamos un objeto vacío (null)
+        return Optional.ofNullable(profesorRepository.getOne(id))
                 .orElse(null);
     }
 
     public void update(Profesor profesor) {
-//        Profesor dbProfesor = findOne(profesor.getId());
-//
-//        if (!profesor.getNombrecito().equals(dbProfesor.getNombrecito()))
-//            dbProfesor.setNombrecito(profesor.getNombrecito());
-
-//        profesorRepository.save(dbProfesor);
-
         profesorRepository.save(profesor);
     }
 

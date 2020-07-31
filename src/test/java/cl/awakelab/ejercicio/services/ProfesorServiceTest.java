@@ -94,6 +94,6 @@ public class ProfesorServiceTest {
         System.out.println("PROFESORES: " + dbProfesores);
         System.out.println("CURSO: " + dbCurso);
 
-//        assertTrue((BooleanSupplier) profesorService.findOne(dbCurso.getProfesor().getId()));
+        assertNull(dbCurso.getProfesor());
     }
 }

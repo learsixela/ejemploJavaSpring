@@ -9,4 +9,5 @@ import java.util.Set;
 @Repository
 public interface ProfesorRepository extends JpaRepository<Profesor, Long> {
     Set<Profesor> findAllByNombrecito(String name);
+    Set<Profesor> findAllByAge(int age);
 }

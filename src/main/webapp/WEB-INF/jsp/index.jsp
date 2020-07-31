@@ -10,18 +10,7 @@
 <title>index</title>
 </head>
 <body>
- <h2>Hola mundo ${curso.nombre}</h2>
- 
- <h2>Hola mundo ${curso.alumno.id}</h2>
- <h2>Hola mundo ${curso.alumno.nombre}</h2>
- <c:forEach items="${listaAlumnos}" var="alumno">
- <ol>
- 	<li>${alumno.id}</li>
- 	<li>${alumno.nombre}</li>
- </ol>
-
- </c:forEach>
- 
- 
+<%--  Utilizamos los tags jstl para utilizar rutas dinámicas   --%>
+ <a href="<c:url value="/profesor"/>">Agregar profesor</a>
 </body>
 </html>
