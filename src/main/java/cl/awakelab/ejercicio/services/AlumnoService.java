@@ -11,11 +11,11 @@ import cl.awakelab.ejercicio.repositories.AlumnoRepository;
 @Service
 public class AlumnoService {
 	@Autowired
-	AlumnoRepository alRepo;
+	private AlumnoRepository alumnoRepository;
 
-	public List<Alumno> obtenerTodosLosAlumnos() {
+	public List<Alumno> findAll() {
 		// TODO Auto-generated method stub
-		return alRepo.findAll();
+		return alumnoRepository.findAll();
 	}
 	
 

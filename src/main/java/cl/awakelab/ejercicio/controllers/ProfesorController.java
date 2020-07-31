@@ -2,8 +2,7 @@ package cl.awakelab.ejercicio.controllers;
 
 import cl.awakelab.ejercicio.models.Curso;
 import cl.awakelab.ejercicio.models.Profesor;
-import cl.awakelab.ejercicio.repositories.CursoRepository;
-import cl.awakelab.ejercicio.repositories.ProfesorRepository;
+import cl.awakelab.ejercicio.services.CursoService;
 import cl.awakelab.ejercicio.services.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,7 @@ public class ProfesorController {
     @Autowired
     private ProfesorService profesorService;
     @Autowired
-    private CursoRepository cursoRepository;
-
-    @Autowired
-    private ProfesorRepository profesorRepository;
+    private CursoService cursoService;
 
 
     @Transactional
@@ -47,7 +43,7 @@ public class ProfesorController {
 
         System.out.println(dbProfesor);
 
-        Curso dbCurso = cursoRepository.getOne(1L);
+        Curso dbCurso = cursoService.findOne(1L);
 
         System.out.println(dbCurso);
 

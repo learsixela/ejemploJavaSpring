@@ -10,7 +10,7 @@ import java.util.Set;
 public class Prueba {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "PRUEBA_SEQ")
     private Long id;
 
     @Column(length = 2)

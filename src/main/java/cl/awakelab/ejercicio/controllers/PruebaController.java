@@ -2,8 +2,8 @@ package cl.awakelab.ejercicio.controllers;
 
 import cl.awakelab.ejercicio.models.Curso;
 import cl.awakelab.ejercicio.models.Prueba;
-import cl.awakelab.ejercicio.repositories.CursoRepository;
-import cl.awakelab.ejercicio.repositories.PruebaRepository;
+import cl.awakelab.ejercicio.services.CursoService;
+import cl.awakelab.ejercicio.services.PruebaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PruebaController {
     @Autowired
-    private CursoRepository cursoRepository;
+    private CursoService cursoService;
 
     @Autowired
-    private PruebaRepository pruebaRepository;
+    private PruebaService pruebaService;
 
     @Transactional
     @GetMapping("/prueba_curso")
@@ -39,9 +39,9 @@ public class PruebaController {
         System.out.println(curso);
         System.out.println(prueba);
 
-        Curso dbCurso = cursoRepository.save(curso);
+        Curso dbCurso = cursoService.save(curso);
 
-        Prueba dbPrueba = pruebaRepository.save(prueba);
+        Prueba dbPrueba = pruebaService.save(prueba);
 
         System.out.println("DESPUÉS DE LA TRANSACCIÓN");
 

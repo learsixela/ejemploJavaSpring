@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Alumno {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	private String nombre;
 	

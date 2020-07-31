@@ -22,8 +22,8 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home(Model model) {
-		Curso curso = cs.obtenerCurso(1L);
-		List<Alumno> alumnos = als.obtenerTodosLosAlumnos();
+		Curso curso = cs.findOne(1L);
+		List<Alumno> alumnos = als.findAll();
 		
 		model.addAttribute("curso",curso);
 		model.addAttribute("listaAlumnos",alumnos);

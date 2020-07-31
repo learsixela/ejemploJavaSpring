@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 public class Curso {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
 	@NotBlank(message = "DEBES INGRESAR ALGO")
@@ -49,6 +49,18 @@ public class Curso {
 
 	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
+	}
+
+	@ManyToOne
+	@JoinColumn
+	private Conserje conserje;
+
+	public Conserje getConserje() {
+		return conserje;
+	}
+
+	public void setConserje(Conserje conserje) {
+		this.conserje = conserje;
 	}
 
 	/*
@@ -153,13 +165,20 @@ public class Curso {
 
 	@Override
 	public String toString() {
-		return "Curso{" +
+		String toString = "Curso{" +
 				"id=" + id +
 				", nombre='" + nombre + '\'' +
 				", detalle='" + detalle + '\'' +
 				", createAt=" + createAt +
 				", updateAt=" + updateAt +
 				", pruebas=" + pruebas +
-				'}';
+				", profesor_id=";
+
+		if (profesor != null) toString += profesor.getId();
+		else toString += "null";
+
+		toString += '}';
+
+		return toString;
 	}
 }

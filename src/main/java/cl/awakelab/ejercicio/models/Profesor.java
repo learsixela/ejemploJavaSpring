@@ -36,6 +36,18 @@ public class Profesor {
         this.nombrecito = name;
     }
 
+    // ***************************************************
+
+    /*
+        Es importante (sólo por facilidad de código) crear métodos extras
+        para generar el nexo entre, en este caso, cursos y profesores.
+
+        Estos métodos extra son .addCurso(Curso curso) y .deleteCurso(Curso curso),
+        para este caso.
+
+        Esto se utiliza para relaciones @ManyToOne (o viceversa) y @ManyToMany.
+     */
+
     public List<Curso> getCursosLista() {
         return cursosLista;
     }
@@ -53,6 +65,9 @@ public class Profesor {
         cursosLista.remove(curso);
         curso.setProfesor(null);
     }
+
+    // ***************************************************
+
 
     @Override
     public String toString() {
